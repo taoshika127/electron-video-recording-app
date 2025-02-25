@@ -1,12 +1,12 @@
 import './StartPage.css';
 import Header from '../components/Header.jsx';
-import Video from '../components/Video.jsx'
+import VideoControls from '../components/VideoControls.jsx'
 
 function StartPage() {
     return (
         <div>
             <Header />
-            <Video />
+            <VideoControls />
         </div>
     )
 
