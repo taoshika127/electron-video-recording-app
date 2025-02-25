@@ -1,8 +1,10 @@
 .basic-button {
-    width: 250px;
-    min-height: 50px;
-    border: solid 1px black;
+    width: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 40px;
     border-radius: 5px;
     font-size: x-large;
     font-weight: 600;
+    color: white;
 }

@@ -1,9 +1,11 @@
 import './Btn.css';
 
-function Btn({ text, color, handleClick}) {
+function Btn({ icon, text, color, handleClick}) {
     return (
-      <div>
-        <button onClick={handleClick} className={"basic-button " + color} >{text}</button>
+      <div className="flex justify-center items-center">
+        <button onClick={handleClick} className={"basic-button flex justify-center items-center " + color} >
+            <div className="mr-2">{icon}</div>
+            {text}</button>
       </div>
     )
 }
