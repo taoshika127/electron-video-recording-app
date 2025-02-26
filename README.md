@@ -5,7 +5,7 @@ This is a video recording app which allows user to record a video by using the b
 
 #Get start:
 1. Git clone this repository to your local folder.
-2. Run 'npm run build' to build all the necessary packages etc.
+2. Run 'npm install' to build all the necessary packages etc.
 3. Run 'npm start' and open 'http://localhost:3000/' on your browser to test out all the functions!
 4. Some nice features to look at:
     a. Intuitive user interface
