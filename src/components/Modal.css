@@ -11,4 +11,12 @@
     font-family: "Kanit", serif;
     font-weight: 500;
     font-style: normal;
-  }
+}
+
+.confirm-modal {
+    width: 500px;
+    height: auto;
+    border: solid 1px #202020;
+    border-radius: 10px;
+    background-color: white;
+}
