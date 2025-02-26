@@ -67,7 +67,7 @@ export default function VideoControls () {
         <div className="video-controls w-full">
             <ReactMediaRecorder
             video
-            render={({ status, startRecording, stopRecording, pauseRecording, resumeRecording, mediaBlobUrl, previewStream, error }) =>
+            render={({ status, startRecording, stopRecording, pauseRecording, resumeRecording, mediaBlobUrl, clearBlobUrl, previewStream, error }) =>
                 (!error ?
                 (<div className="h-full">
                     <div className="controls flex justify-center items-center">
@@ -91,6 +91,7 @@ export default function VideoControls () {
                         {status === 'stopped' ? <div className="flex-col justify-center items-center">
                             <Btn icon={<RestartAltIcon />} handleClick={() => {
                                 window.location.reload()
+                                clearBlobUrl()
                             }} text="Start Over" color="bg-green-400"/>
                             <div className="mt-2 text-blue-600">
                                 <DownloadIcon />
@@ -114,6 +115,7 @@ export default function VideoControls () {
                     }}/> : null}
                     {showConfirmRetake ? <Modal purpose='confirm retake' handleRetake={() => {
                         window.location.reload()
+                        clearBlobUrl()
                     }} handleModalOver={async () => {
                         resumeRecording()
                         setShowConfirmRetake(false)
