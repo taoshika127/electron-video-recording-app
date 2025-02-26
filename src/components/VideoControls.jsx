@@ -11,6 +11,7 @@ import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import DownloadIcon from '@mui/icons-material/Download';
 import './VideoControls.css';
 import Modal from './Modal.jsx';
+import Error from './Error.jsx';
 
 const VideoPreview = ({ stream }: { stream: MediaStream | null }) => {
     const videoRef = useRef(null);
@@ -38,9 +39,10 @@ export default function VideoControls () {
         <div className="video-controls w-full">
             <ReactMediaRecorder
             video
-            render={({ status, startRecording, stopRecording, pauseRecording, resumeRecording, mediaBlobUrl, previewStream }) => (
-                <div className="h-full">
-                    <div>{status}</div>
+            render={({ status, startRecording, stopRecording, pauseRecording, resumeRecording, mediaBlobUrl, previewStream, error }) =>
+                (!error ?
+                (<div className="h-full">
+                    {/* <div>{status}</div> */}
                     <div className="controls flex justify-center items-center">
                         {status === 'idle' ? <Btn icon={<CircleIcon />} handleClick={() => {
                             setShowCountdown(true)
@@ -77,7 +79,7 @@ export default function VideoControls () {
                                                 videoConstraints={videoConstraints}
                                             >
                                             </Webcam> : null}
-                        {status === 'recording' ? <VideoPreview stream={previewStream} /> : null}
+                        {status === 'recording' || status === 'paused' ? <VideoPreview stream={previewStream} /> : null}
                         {status === 'stopped' ? <Video src={mediaBlobUrl} autoPlay={false} controls={true} /> : null}
                     </div>
                     {showCountdown ? <Modal purpose='countdown' handleModalOver={async () => {
@@ -90,9 +92,9 @@ export default function VideoControls () {
                         resumeRecording()
                         setShowConfirmRetake(false)
                     }} /> : null}
-                </div>
-
-            )}
+                </div>) :
+                <Error errorType='media-aborted'/>)
+            }
             />
         </div>
     );
