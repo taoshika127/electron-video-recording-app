@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useReactMediaRecorder, ReactMediaRecorder } from "react-media-recorder";
 import Video from './Video.jsx';
 import Webcam from "react-webcam";
@@ -7,7 +7,10 @@ import Counter from './Counter.jsx';
 import CircleIcon from '@mui/icons-material/Circle';
 import SquareIcon from '@mui/icons-material/Square';
 import UndoIcon from '@mui/icons-material/Undo';
+import RestartAltIcon from '@mui/icons-material/RestartAlt';
+import DownloadIcon from '@mui/icons-material/Download';
 import './VideoControls.css';
+import Modal from './Modal.jsx';
 
 const VideoPreview = ({ stream }: { stream: MediaStream | null }) => {
     const videoRef = useRef(null);
@@ -29,6 +32,8 @@ const videoConstraints = {
 };
 
 export default function VideoControls () {
+    const [showCountdown, setShowCountdown] = useState(true);
+    const [showConfirmRetake, setShowConfirmRetake] = useState(false);
     return (
         <div className="video-controls w-full">
             <ReactMediaRecorder
@@ -48,9 +53,18 @@ export default function VideoControls () {
                             </div>
                         </div>
                         ) : null}
+                        {status === 'stopped' ? <div className="flex-col justify-center items-center">
+                            <Btn icon={<RestartAltIcon />} handleClick={() => {
+                                window.location.reload()
+                            }} text="Start Over" color="bg-green-400"/>
+                            <div className="mt-10 text-blue-600">
+                                <DownloadIcon />
+                                <a className="download" href={mediaBlobUrl} download={(new Date(Date.now())).toString() || 'file' + '.mp4'}>Download</a>
+                            </div>
+                        </div> : null}
                     </div>
                     <div className="w-full video-screen flex justify-center items-center">
-                        {status === 'idle' ? <Webcam
+                        {status === 'idlee' ? <Webcam
                                                 audio={false}
                                                 screenshotFormat="image/jpeg"
                                                 width={1080}
@@ -63,6 +77,12 @@ export default function VideoControls () {
                 </div>
             )}
             />
+            {showCountdown ? <Modal purpose='countdown' handleModalOver={() => {
+                setShowCountdown(false)
+            }}/> : null}
+            {showConfirmRetake ? <Modal purpose='confirm retake' handleModalOver={() => {
+                setShowConfirmRetake(false)
+            }}/> : null}
         </div>
     );
 
