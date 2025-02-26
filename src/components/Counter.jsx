@@ -16,7 +16,7 @@ const getMinutes = (secondsDiff) => {
     return Math.floor(secondsDiff / 60)
 }
 
-export default function Counter() {
+export default function Counter({paused}) {
     const [secondsDiff, setSecondsDiff] = useState(0)
     useEffect(() => {
         const intervalId = setInterval(() => {
@@ -26,9 +26,13 @@ export default function Counter() {
             clearInterval(intervalId);
         };
     }, [])
+    useEffect(() => {
+
+
+    }, [paused])
     return <div className="flex justify-center items-center gap-2">
         <CircleIcon sx={{ color: "#F88379" }} />
-        <p className="text-4xl text-gray-500">{convertToString(getMinutes(secondsDiff)) + ' : ' + convertToString(getSeconds(secondsDiff))}</p>
+        <p className="text-2xl text-gray-500">{convertToString(getMinutes(secondsDiff)) + ' : ' + convertToString(getSeconds(secondsDiff))}</p>
     </div>
 
 }

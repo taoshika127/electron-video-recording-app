@@ -1,11 +1,9 @@
 .video-controls {
     height: fit-content;
+    position: absolute;
+    top: 0;
 }
 
 .controls {
-    height: 150px;
-}
-.video-screen {
-    position: absolute;
-    top: 25%;
+    height: 100px;
 }

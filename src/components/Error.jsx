@@ -3,6 +3,7 @@ import Btn from '../ui/Btn.jsx';
 
 const errorMessage =(errorType) => {
     switch(errorType) {
+        case 'webcam-unavailable': return 'Webcam is not available on your laptop!';
         case 'media-aborted': return 'Media is aborted!';
         case 'permission_denied': return 'Permission is denied!';
         case 'no_specified_media_found': return 'No specified media is found!';
@@ -18,7 +19,8 @@ export default function Error({errorType}) {
         <div className="error-message-container text-red-500">
             <p className="pb-10">Error: {errorMessage(errorType)}</p>
             <Btn text="Got it!" color="bg-slate-600" handleClick={() => {
-                window.location.reload()
+                const googleUrl = `https://www.google.com/search?q=${errorType}`;
+                window.location.replace (googleUrl)
             }} />
         </div>
     </div>);
